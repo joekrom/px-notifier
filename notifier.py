@@ -21,7 +21,7 @@ def send_email():
     if None in (smtp_port, smtp_address, sender_email_auth, sender_password_auth, receiver_email, sender_mail) or '' in (smtp_port, smtp_address, sender_email_auth, sender_password_auth, receiver_email, sender_mail):
              # writing to the buffer
             output = "One or more required environment variables are empty or not set."
-            io.write_to_output({"status": f"Error: {output}"})
+            #io.write_to_output({"status": f"Error: {output}"})
             raise ValueError(output)
 
     message = MIMEMultipart("alternative")
@@ -50,8 +50,8 @@ def send_email():
       server.sendmail(sender_email, receiver_email, message.as_string())
     except Exception as e:
         output = "One or more required environment variables are empty or not set."
-        io.write_to_output({"status": f"Error: {output}"})
-      print(e)
+        #io.write_to_output({"status": f"Error: {output}"})
+        print(e)
     finally:
       server.quit()
 
