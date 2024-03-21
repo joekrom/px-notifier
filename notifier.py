@@ -5,23 +5,34 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
 
-port = 587
-smtp_server = os.environ.get("SMTP_SERVER")
-SENDER_EMAIL = os.environ.get("SENDER_EMAIL")
-SENDER_PASSWORD = os.environ.get("SENDER_PASSWORD")
-RECEIVER_EMAIL = os.environ.get("RECEIVER_EMAIL")
-TEXT = os.environ.get("MSG")
+smtp_port = os.environ.get("INPUT_SERVER_PORT")
+smtp_address = os.environ.get("INPUT_SMTP_SERVER")
+sender_email_auth = os.environ.get("INPUT_USERNAME")
+sender_password_auth = os.environ.get("INPUT_PASSWORD")
+receiver_email = os.environ.get("INPUT_TO")
+subject = os.environ.get("INPUT_SUBJECT")
+body = os.environ.get("INPUT_BODY")
+sender_email = os.environ.get("INPUT_FROM")
+ssl = os.environ.get("INPUT_SSL")
+
 
 def send_email():
+    # Check if any of the environment variables are empty or None
+    if None in (smtp_port, smtp_address, sender_email_auth, sender_password_auth, receiver_email, sender_mail) or '' in (smtp_port, smtp_address, sender_email_auth, sender_password_auth, receiver_email, sender_mail):
+             # writing to the buffer
+            output = "One or more required environment variables are empty or not set."
+            io.write_to_output({"status": f"Error: {output}"})
+            raise ValueError(output)
+
     message = MIMEMultipart("alternative")
-    message["Subject"] = "message from pipeline"
-    message["From"] = SENDER_EMAIL
-    message["To"] = RECEIVER_EMAIL
+    message["Subject"] = subject
+    message["From"] = sender_email
+    message["To"] = receiver_email
 
     text = """\
-        This is msg is from the gitea pipeline
+        default message from action
     """
-    text = TEXT
+    text = body
 
     part1 = MIMEText(text, "plain")
     message.attach(part1)
@@ -30,13 +41,15 @@ def send_email():
 
     # Try to log  to server and send email
     try:
-      server = smtplib.SMTP(smtp_server, port)
+      server = smtplib.SMTP(smtp_address, smtp_port)
       server.ehlo()
       server.starttls(context=context)
       server.ehlo()
-      server.login(SENDER_EMAIL, SENDER_PASSWORD)
-      server.sendmail(SENDER_EMAIL, RECEIVER_EMAIL, message.as_string())
+      server.login(sender_email_auth, sender_password_auth)
+      server.sendmail(sender_email, receiver_email, message.as_string())
     except Exception as e:
+        output = "One or more required environment variables are empty or not set."
+        io.write_to_output({"status": f"Error: {output}"})
       print(e)
     finally:
       server.quit()
