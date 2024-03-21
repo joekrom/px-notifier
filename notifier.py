@@ -41,7 +41,7 @@ def send_email():
 
     # Try to log  to server and send email
     try:
-      server = smtplib.SMTP(smtp_address, smtp_port)
+      server = smtplib.SMTP(smtp_address, int(smtp_port))
       server.ehlo()
       server.starttls(context=context)
       server.ehlo()
