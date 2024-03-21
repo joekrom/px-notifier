@@ -18,7 +18,7 @@ ssl = os.environ.get("INPUT_SSL")
 
 def send_email():
     # Check if any of the environment variables are empty or None
-    if None in (smtp_port, smtp_address, sender_email_auth, sender_password_auth, receiver_email, sender_mail) or '' in (smtp_port, smtp_address, sender_email_auth, sender_password_auth, receiver_email, sender_mail):
+    if None in (smtp_port, smtp_address, sender_email_auth, sender_password_auth, receiver_email, sender_email) or '' in (smtp_port, smtp_address, sender_email_auth, sender_password_auth, receiver_email, sender_email):
              # writing to the buffer
             output = "One or more required environment variables are empty or not set."
             #io.write_to_output({"status": f"Error: {output}"})
