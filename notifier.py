@@ -43,7 +43,8 @@ def send_email():
     try:
       server = smtplib.SMTP(smtp_address, int(smtp_port))
       server.ehlo()
-      server.starttls(context=context)
+      if ssl == 'true':
+          server.starttls(context=context)
       server.ehlo()
       server.login(sender_email_auth, sender_password_auth)
       server.sendmail(sender_email, receiver_email, message.as_string())
