@@ -1,0 +1,66 @@
+# .github/workflows/main.yml
+name: Testing My hello-world Action
+
+on: 
+  workflow_dispatch:
+    inputs:
+      smtp_address:
+        description: set an smtp address for the smtp server
+        required: true
+        type: string
+      smtp_port:
+         description: set a port for the smtp server
+         required: true
+         type: string
+      username:
+         description: username for smtp server auth
+         required: true
+         type: string
+      password:
+         description: set a password for the smtp server
+         required: true
+         type: string
+      ssl:
+         description: indicates whether you need TLS/SSL
+         required: true
+         type: boolean
+      from:
+         description: email of the sender
+         required: true
+         type: string
+      to:
+         description: email of the receiver
+         required: true
+         type: string
+      suubject:
+         description: set a subject for the email
+         required: false
+         type: string
+      body:
+         description: body message in text
+         required: false
+         type: string
+      
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+      
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - id: greetings
+        name: Using hello-world
+        # use the action that's inside the same repository
+        uses: ./
+        with:
+          smtp_address: ${{ inputs.smtp_address }}
+          smtp_port: ${{ inputs.smtp_port }}
+          username: ${{ inputs.username }}
+          password: ${{ inputs.password }}
+          ssl: ${{ inputs.ssl }}
+          from: ${{ inputs.from }}
+          to: ${{ inputs.to }}
+          subject: ${{ inputs.subject }}
+          body: ${{ inputs.body }}
