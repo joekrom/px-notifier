@@ -1,0 +1,50 @@
+name: 'px email sender'
+description: 'docker action for sending email using python stmp'
+branding:
+  icon: "share"
+  color: "purple"
+inputs: 
+  smtp_address:
+    description: 'Host name of the SMTP server.'
+    required: true
+  server_port:
+    description: 'TCP port of the SMTP server.'
+    required: true
+  username:
+    description: 'user name for SMTP auth'
+    required: true
+  password:
+    description: 'password for SMTP auth'
+    required: true
+  subject:
+    description: 'cloud foundry space'
+    required: true
+  to:
+    description: 'destination email address.'
+    required: true
+  from:
+    description: 'Email address of sender.'
+    required: true
+  body:
+    description: 'cloud foundry space'
+    required: false
+  html_body:
+    description: 'cloud foundry space'
+    required: false
+  attachements:
+    description: 'cloud foundry space'
+    required: false
+  cc:
+    description: 'cloud foundry space'
+    required: false
+    
+outputs:
+  status:
+    description: "provide the status of the action"
+  
+    
+runs:
+  using: docker
+  image: Dockerfile
+  args:
+    - ${{ inputs.command }}
