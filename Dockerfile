@@ -1,5 +1,5 @@
 # Download base image bitnami
-FROM bitnami/python:3.12.2
+FROM bitnami/python:3.10-debian-12
 
 # LABEL about the custom image
 LABEL maintainer="joel.dfankam@yahoo.fr"
