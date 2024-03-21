@@ -16,6 +16,9 @@ inputs:
   password:
     description: 'password for SMTP auth'
     required: true
+  ssl:
+    description: 'password for SMTP auth'
+    required: true
   subject:
     description: 'email subject'
     required: false
