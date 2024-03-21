@@ -6,7 +6,7 @@ from email.mime.multipart import MIMEMultipart
 
 
 smtp_port = os.environ.get("INPUT_SMTP_PORT")
-smtp_address = os.environ.get("INPUT_SMTP_SERVER")
+smtp_address = os.environ.get("INPUT_SMTP_ADDRESS")
 sender_email_auth = os.environ.get("INPUT_USERNAME")
 sender_password_auth = os.environ.get("INPUT_PASSWORD")
 receiver_email = os.environ.get("INPUT_TO")
