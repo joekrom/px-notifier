@@ -7,7 +7,7 @@ inputs:
   smtp_address:
     description: 'Host name of the SMTP server.'
     required: true
-  server_port:
+  smtp_port:
     description: 'TCP port of the SMTP server.'
     required: true
   username:
@@ -17,8 +17,8 @@ inputs:
     description: 'password for SMTP auth'
     required: true
   subject:
-    description: 'cloud foundry space'
-    required: true
+    description: 'email subject'
+    required: false
   to:
     description: 'destination email address.'
     required: true
@@ -26,10 +26,10 @@ inputs:
     description: 'Email address of sender.'
     required: true
   body:
-    description: 'cloud foundry space'
+    description: 'message in text'
     required: false
   html_body:
-    description: 'cloud foundry space'
+    description: 'message in html form'
     required: false
   attachements:
     description: 'cloud foundry space'
@@ -46,5 +46,3 @@ outputs:
 runs:
   using: docker
   image: Dockerfile
-  args:
-    - ${{ inputs.command }}
