@@ -13,7 +13,7 @@ receiver_email = os.environ.get("INPUT_TO")
 subject = os.environ.get("INPUT_SUBJECT")
 body = os.environ.get("INPUT_BODY")
 sender_email = os.environ.get("INPUT_FROM")
-ssl = os.environ.get("INPUT_SSL")
+ssl_tls = os.environ.get("INPUT_SSL")
 
 
 def send_email():
@@ -43,7 +43,7 @@ def send_email():
     try:
       server = smtplib.SMTP(smtp_address, int(smtp_port))
       server.ehlo()
-      if ssl == 'true':
+      if ssl_tls == 'true':
           server.starttls(context=context)
       server.ehlo()
       server.login(sender_email_auth, sender_password_auth)
