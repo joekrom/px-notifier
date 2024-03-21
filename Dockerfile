@@ -11,4 +11,4 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y
 WORKDIR /app
 COPY . /app
-CMD ["python" "/app/notifier.py"]
+CMD ["python", "/app/notifier.py"]
