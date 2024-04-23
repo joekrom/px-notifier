@@ -47,7 +47,7 @@ def send_email():
     part1 = MIMEText(text, "plain")
     message.attach(part1)
     
-    if (len(receiver_email.split(",")) > 1):
+    if (len(receiver_email.split(",")) >= 1):
         emails = receiver_email.split(",")
         for email_addr in emails:
             message["To"] = email_addr
@@ -69,7 +69,6 @@ def send_email():
                 print(e)
             finally:
               server.quit()
-
 
 if __name__ == "__main__":
     send_email()
