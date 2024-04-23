@@ -50,25 +50,26 @@ def send_email():
     if (len(receiver_email.split(",")) >= 1):
         emails = receiver_email.split(",")
         for email_addr in emails:
-            message["To"] = email_addr
-            # Create a secure SSL context
-            context = ssl.create_default_context()
-        
-            # Try to log  to server and send email
-            try:
-              server = smtplib.SMTP(smtp_address, int(smtp_port))
-              server.ehlo()
-              if ssl_tls == 'true':
-                  server.starttls(context=context)
-              server.ehlo()
-              server.login(sender_email_auth, sender_password_auth)
-              server.sendmail(sender_email, email_addr, message.as_string())
-            except Exception as e:
-                output = "One or more required environment variables are empty or not set."
-                set_output("status", output)
-                print(e)
-            finally:
-              server.quit()
+            if(email_addr.strip()):
+                message["To"] = email_addr.strip()
+                # Create a secure SSL context
+                context = ssl.create_default_context()
+            
+                # Try to log  to server and send email
+                try:
+                server = smtplib.SMTP(smtp_address, int(smtp_port))
+                server.ehlo()
+                if ssl_tls == 'true':
+                    server.starttls(context=context)
+                server.ehlo()
+                server.login(sender_email_auth, sender_password_auth)
+                server.sendmail(sender_email, email_addr, message.as_string())
+                except Exception as e:
+                    output = "One or more required environment variables are empty or not set."
+                    set_output("status", output)
+                    print(e)
+                finally:
+                server.quit()
 
 if __name__ == "__main__":
     send_email()
