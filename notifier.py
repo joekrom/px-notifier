@@ -57,13 +57,13 @@ def send_email():
             
                 # Try to log  to server and send email
                 try:
-                server = smtplib.SMTP(smtp_address, int(smtp_port))
-                server.ehlo()
-                if ssl_tls == 'true':
+                  server = smtplib.SMTP(smtp_address, int(smtp_port))
+                  server.ehlo()
+                  if ssl_tls == 'true':
                     server.starttls(context=context)
-                server.ehlo()
-                server.login(sender_email_auth, sender_password_auth)
-                server.sendmail(sender_email, email_addr, message.as_string())
+                    server.ehlo()
+                    server.login(sender_email_auth, sender_password_auth)
+                    server.sendmail(sender_email, email_addr, message.as_string())
                 except Exception as e:
                     output = "One or more required environment variables are empty or not set."
                     set_output("status", output)
