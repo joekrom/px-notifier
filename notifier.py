@@ -69,7 +69,7 @@ def send_email():
                     set_output("status", output)
                     print(e)
                 finally:
-                server.quit()
+                  server.quit()
     else:
         set_output("status", "error: set at least one email")
         raise Exception("at least one valid  receiver email is expected")
