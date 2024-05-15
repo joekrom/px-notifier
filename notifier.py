@@ -48,7 +48,7 @@ def send_email():
     message.attach(part1)
     
     if (len(receiver_email.split(",")) >= 1):
-        emails = receiver_email.split(",")
+        emails = list(set(receiver_email.split(",")))
         for email_addr in emails:
             if(email_addr.strip()):
                 message["To"] = email_addr.strip()
